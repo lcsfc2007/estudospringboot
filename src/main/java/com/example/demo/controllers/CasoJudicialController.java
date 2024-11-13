@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -58,6 +59,17 @@ public class CasoJudicialController {
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body("Deletado com sucesso");
         
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CasoJudicial> atualizarCaso(@PathVariable Long id, @RequestBody CasoJudicial casoJudicial)
+    {
+        CasoJudicial atual = casoJudicialService.getCasoJudicial(id);
+        if(atual == null)
+            return ResponseEntity.notFound().build();
+        atual.setDescricao(casoJudicial.getDescricao());
+        atual.setEstado(casoJudicial.getEstado());
+        return ResponseEntity.ok(atual);
+    }   
 
 
 }
