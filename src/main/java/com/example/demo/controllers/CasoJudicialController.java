@@ -66,6 +66,7 @@ public class CasoJudicialController {
         CasoJudicial atual = casoJudicialService.getCasoJudicial(id);
         if(atual == null)
             return ResponseEntity.notFound().build();
+        //altera campos do caso judicial
         atual.setDescricao(casoJudicial.getDescricao());
         atual.setEstado(casoJudicial.getEstado());
         return ResponseEntity.ok(atual);
